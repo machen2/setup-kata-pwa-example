@@ -5,7 +5,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayText: ''
+      displayText: '',
+      shouldDisplay: false
     }
   }
 
@@ -15,11 +16,18 @@ class App extends Component {
     })
   };
 
+  handleClick = () => {
+    this.setState({
+      shouldDisplay: true
+    });
+  };
+
   render() {
     return (
       <div className="App">
         <input onChange={this.handleChange} />
-        <p>{this.state.displayText}</p>
+        <button onClick={this.handleClick}>Submit</button>
+        {this.state.shouldDisplay && <p>{this.state.displayText}</p>}
       </div>
     );
   }

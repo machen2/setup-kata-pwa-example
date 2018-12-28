@@ -24,9 +24,12 @@ describe('FizzBuzz', () => {
       expect(wrapper.find('input').length).toEqual(1);
     });
 
-    it('should display the text entered in the input', () => {
+    it('should only display the text entered in the input when button is pressed', () => {
         const wrapper = mount(<App/>);
         wrapper.find('input').simulate('change', { target: { value: 18 }});
+        expect(wrapper.find('p').length).toEqual(0);
+
+        wrapper.find('button').simulate('click');
         expect(wrapper.find('p').text()).toEqual('18');
     });
 });
