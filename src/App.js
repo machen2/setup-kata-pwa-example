@@ -5,23 +5,33 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayText: '',
-      shouldDisplay: false
+      inputValue: '',
+      shouldDisplay: false,
+      displayText: ''
     }
   }
 
   handleChange = (e) => {
     this.setState({
-      displayText: e.target.value,
+      inputValue: e.target.value,
       shouldDisplay: false
     })
   };
 
   handleClick = () => {
+    this.updateDisplayText();
     this.setState({
       shouldDisplay: true
     });
   };
+
+  updateDisplayText() {
+    if(this.state.inputValue === 3) {
+      this.setState({displayText: 'Fizz'});
+    } else {
+      this.setState({displayText: this.state.inputValue});
+    }
+  }
 
   render() {
     return (
