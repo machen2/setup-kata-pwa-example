@@ -26,10 +26,12 @@ class App extends Component {
   };
 
   updateDisplayText() {
-    if (this.state.inputValue % 3 === 0) {
+    if (this.state.inputValue === 15) {
+      this.setState({displayText: 'FizzBuzz'});
+    } else if (this.state.inputValue % 3 === 0) {
       this.setState({displayText: 'Fizz'});
     } else if (this.state.inputValue % 5 === 0) {
-        this.setState({displayText: 'Buzz'});
+      this.setState({displayText: 'Buzz'});
     } else {
       this.setState({displayText: this.state.inputValue});
     }

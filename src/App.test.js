@@ -90,4 +90,14 @@ describe('FizzBuzz', () => {
       expect(wrapper.find('p').text()).toEqual('Buzz');
   });
 
+  // Given a user is on the Fizzbuzz form
+  // When she enters the number 15 into an input box
+  // AND clicks the submit button
+  // The word Fizzbuzz is displayed
+  it('should display FizzBuzz when user enters 15 in input and submits', () => {
+      const wrapper = mount(<App/>);
+      wrapper.find('input').simulate('change', { target: { value: 15 }});
+      wrapper.find('button').simulate('click');
+      expect(wrapper.find('p').text()).toEqual('FizzBuzz');
+  });
 });
