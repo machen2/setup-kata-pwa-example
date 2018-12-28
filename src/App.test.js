@@ -13,3 +13,14 @@ it('should use Enzyme', () => {
   const wrapper = mount(<App/>);
   expect(wrapper).toBeTruthy();
 });
+
+describe('FizzBuzz', () => {
+    // Given a user is on the Fizzbuzz form
+    // When she enters any number into an input box
+    // AND clicks the submit button
+    // Then the number is displayed
+    it('has an input field', () => {
+      const wrapper = mount(<App/>);
+      expect(wrapper.find('input').length).toEqual(1);
+    });
+});
