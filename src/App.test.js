@@ -30,17 +30,17 @@ describe('FizzBuzz', () => {
   });
 
   it('should only display the text entered in the input when button is pressed', () => {
-      wrapper.find('input').simulate('change', { target: { value: 18 }});
+      wrapper.find('input').simulate('change', { target: { value: 13 }});
       expect(wrapper.find('p').length).toEqual(0);
 
       wrapper.find('button').simulate('click');
-      expect(wrapper.find('p').text()).toEqual('18');
+      expect(wrapper.find('p').text()).toEqual('13');
   });
 
   it('should not display the text when user starts to enter a second input', () => {
-      wrapper.find('input').simulate('change', { target: { value: 18 }});
+      wrapper.find('input').simulate('change', { target: { value: 13 }});
       wrapper.find('button').simulate('click');
-      expect(wrapper.find('p').text()).toEqual('18');
+      expect(wrapper.find('p').text()).toEqual('13');
 
       wrapper.find('input').simulate('change', { target: { value: 70 }});
       expect(wrapper.find('p').length).toEqual(0);
@@ -66,5 +66,16 @@ describe('FizzBuzz', () => {
       wrapper.find('input').simulate('change', { target: { value: 5 }});
       wrapper.find('button').simulate('click');
       expect(wrapper.find('p').text()).toEqual('Buzz');
+  });
+
+  // Given a user is on the Fizzbuzz form
+  // When she enters the number that is a multiple of 3 into an input box
+  // AND clicks the submit button
+  // The word Fizz is displayed
+  it('should display Fizz when user enters multiple of 3 in input and submits', () => {
+      const wrapper = mount(<App/>);
+      wrapper.find('input').simulate('change', { target: { value: 9 }});
+      wrapper.find('button').simulate('click');
+      expect(wrapper.find('p').text()).toEqual('Fizz');
   });
 });
