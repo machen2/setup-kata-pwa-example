@@ -32,4 +32,14 @@ describe('FizzBuzz', () => {
         wrapper.find('button').simulate('click');
         expect(wrapper.find('p').text()).toEqual('18');
     });
+
+    it('should not display the text when user starts to enter a second input', () => {
+        const wrapper = mount(<App/>);
+        wrapper.find('input').simulate('change', { target: { value: 18 }});
+        wrapper.find('button').simulate('click');
+        expect(wrapper.find('p').text()).toEqual('18');
+
+        wrapper.find('input').simulate('change', { target: { value: 70 }});
+        expect(wrapper.find('p').length).toEqual(0);
+    });
 });

@@ -12,7 +12,8 @@ class App extends Component {
 
   handleChange = (e) => {
     this.setState({
-      displayText: e.target.value
+      displayText: e.target.value,
+      shouldDisplay: false
     })
   };
 
