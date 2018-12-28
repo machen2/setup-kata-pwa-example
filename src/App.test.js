@@ -23,4 +23,9 @@ describe('FizzBuzz', () => {
       const wrapper = mount(<App/>);
       expect(wrapper.find('input').length).toEqual(1);
     });
+
+    it('can display text', () => {
+      const wrapper = mount(<App/>);
+      expect(wrapper.find('p').text()).toBeTruthy();
+    });
 });
