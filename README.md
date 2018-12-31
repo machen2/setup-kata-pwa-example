@@ -50,7 +50,7 @@ and updated the type to image/png.
 
 *  After doing all of this, the only failure is that HTTP does not redirect to HTTPS. 
 https://developers.google.com/web/tools/lighthouse/audits/http-redirects-to-https 
-You need to host the project somewhere. So for this example, I created a new firebase 
+You should deploy your app to get this failure passing. So for this example, I created a new firebase 
 project in the firebase console (firebase.google.com). Then, I went to my project. Make 
 sure you have firebase tools ```yarn global add firebase-tools``` and you login into firebase 
 from your terminal ```firebase login```. Then I did ```firebase init``` and followed the following 
