@@ -1,68 +1,70 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repo is a partial solution to the kata listed here: https://github.com/aclifton-pillar/reactjs-setup-kata
+and turned into a passing progressive web app.
 
-## Available Scripts
+#### ReactJS as a Progressive Web App (what does it mean?  what is a definition for done that an app is truly PWA?)
 
-In the project directory, you can run:
+Progressive web apps give users an engaging, native-like experience from the web. You can install the web application on your device just like a native mobile app. It allows you to use the app offline by caching data from your last interaction. 
 
-### `npm start`
+#### Benefits:
+* Service workers → make site more reliable, make your app available offline
+* Can use push notifications
+* Can save the webapp to your device’s home screen like a native mobile app
+* Faster on your device than a regular mobile website
+* Can prompt user to add the app to their device’s home screen. If the user adds it to their home screen and then goes to the mobile site, the app will 
+open instead.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Checklist: (definition of done would be fulfilling this checklist!)
+https://developers.google.com/web/progressive-web-apps/checklist
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+You can check how close your webapp is to being a PWA by → right click in Chrome → inspect → click audits tab → run the audit. Alternatively, you can add the Lighthouse Chrome extension, click on the Lighthouse icon in the top right of your screen, and hit ‘generate report’.
 
-### `npm test`
+#### Example of a PWA:
+A good example of a progressive web app is Pinterest. If you go to pinterest.com on your mobile device, then a prompt stating ‘Add Pinterest to Home screen’ will appear on the website. When you click on the prompt and hit add, Pinterest will now be added to your list of apps on your phone. If you put your phone in offline mode, then you can still open Pinterest up.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+#### Steps to make the setup kata a passing PWA:
+With the latest Create React App, the “production build is a fully functional, offline-first Progressive Web App.” More info + tutorial here:
+https://medium.com/@saigeleslie/how-to-create-a-progressive-web-app-with-react-in-5-mins-or-less-3aae3fe98902 
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Note: a lot of tutorials out there have you creating a manifest and your service worker from scratch. However, these were more recently built in with Create React App.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+* In src/index.js, replace ```serviceWorker.unregister();``` with ```serviceWorker.register();```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* In your public directory, I added a png file that I can use for icons on my splash screen and add to home screen prompt. Then, I updated the icons in public/manifest.json to the following: 
 
-### `npm run eject`
+```
+"icons": [
+    {
+      "src": "icon-192x192.png",
+      "sizes": "192x192 512x512",  
+      "type": "image/png"
+    }
+  ]
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* I updated the src with the name of the png file I added (for me it was a react icon I 
+found off the web), updated the sizes to the above as my lighthouse audit suggested, 
+and updated the type to image/png.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    * At this point, I have a lighthouse score of 92% PWA.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+*  After doing all of this, the only failure is that HTTP does not redirect to HTTPS. 
+https://developers.google.com/web/tools/lighthouse/audits/http-redirects-to-https 
+You need to host the project somewhere. So for this example, I created a new firebase 
+project in the firebase console (firebase.google.com). Then, I went to my project. Make 
+sure you have firebase tools ```yarn global add firebase-tools``` and you login into firebase 
+from your terminal ```firebase login```. Then I did ```firebase init``` and followed the following 
+(also outlined in the tutorial link above):
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+	* Choose hosting as the CLI feature
+	
+    * Select your newly created project. (Mine wasn’t listed, so I said create new. Then, in my terminal I did ```firebase use --add``` and selected my project from there.)
 
-## Learn More
+	* Then you can ```firebase deploy```. You will get the address of the firebase hosting url. If 
+you go to that link and run the lighthouse audit again. You should be at 100% PWA 
+score!
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+* Now you can open the hosting url on your mobile phone. You should see a prompt to 
+add it to your home screen. Click it to add. Now, your pwa should be in your list of apps 
+on your phone and you can open it. Try turning off your wifi/data, and you should be able 
+to open your app still.
