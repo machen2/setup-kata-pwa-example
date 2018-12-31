@@ -96,7 +96,7 @@ describe('FizzBuzz', () => {
   // The word Fizzbuzz is displayed
   it('should display FizzBuzz when user enters 15 in input and submits', () => {
       const wrapper = mount(<App/>);
-      wrapper.find('input').simulate('change', { target: { value: 15 }});
+      wrapper.find('input').simulate('change', { target: { value: '15' }});
       wrapper.find('button').simulate('click');
       expect(wrapper.find('p').text()).toEqual('FizzBuzz');
   });
